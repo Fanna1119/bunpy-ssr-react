@@ -10,5 +10,5 @@ bunssr/__pycache__/
 bunssr/build/
 # ignore egg-info
 bunssr.egg-info/
-
+main.pycache
 .DS_Store

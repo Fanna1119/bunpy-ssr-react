@@ -48,6 +48,21 @@ print(html)
 proc.terminate()
 ```
 
+```python
+# Alternatively, use a context manager to automatically handle server lifecycle
+from bunssr import bun_server_context, ReactSSRRenderer
+
+with bun_server_context():
+    renderer = ReactSSRRenderer()
+    html = renderer.render_component(
+        component_path="/absolute/path/to/MyComponent.tsx",
+        props={"title": "Hello from Python SSR!"}
+    )
+    print(html)
+
+# When the block exits, the Bun SSR server is stopped and the socket file cleaned up automatically.
+```
+
 ---
 
 ## 📦 Python API
@@ -80,7 +95,7 @@ bunssr/
 ├── __init__.py
 ├── server/                  # Bun server implementation
 │   ├── index.ts             # SSR entry server
-│   └── package.json         # Dependencies (e.g., react, react-dom, vite)
+│   └── package.json         # Dependencies (e.g., react, react-dom)
 └── render.py                # Python client code
 ```
 
@@ -90,3 +105,14 @@ bunssr/
 
 - Add support for other frameworks (e.g. Vue via `pip install bunssr[vue]`)
 - Add logging, async rendering, or socket health checks
+- Add more examples and tests
+
+## Feedback & Contribution
+
+We welcome your feedback, bug reports, and contributions to make this package better!
+
+### How to give feedback
+
+- If you find a bug or want to request a feature, please open an [issue](https://github.com/Fanna1119/bunpy-ssr-react/issues).
+
+Thank you for helping improve this project! 🙌
