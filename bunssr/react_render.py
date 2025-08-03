@@ -10,6 +10,14 @@ class SSRRenderError(Exception):
 
 class ReactSSRRenderer:
     def __init__(self, socket_path: Optional[str] = None):
+        """
+        Initialize the renderer with the path to the Bun SSR server socket.
+        Args:
+            socket_path (str): Path to the Unix socket for the Bun SSR server.
+                Defaults to the environment variable BUN_RENDER_SOCKET or a default path.
+        Raises:
+            ValueError: If the socket path is not provided and the environment variable is not set.
+        """
         self.socket_path = socket_path or os.getenv(
             "BUN_RENDER_SOCKET", "/tmp/bun_render_socket"
         )
