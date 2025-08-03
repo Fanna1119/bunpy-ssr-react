@@ -1,0 +1,2 @@
+recursive-include bunssr/server *.ts *.json
+prune bunssr/server/node_modules

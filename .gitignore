@@ -1,0 +1,14 @@
+# ignore pycache files
+__pycache__/
+# ignore build files
+build/
+dist/
+# ignore node_modules
+node_modules/
+# ignore bunssr build files
+bunssr/__pycache__/
+bunssr/build/
+
+bunsrr.egg-info/
+
+.DS_Store
