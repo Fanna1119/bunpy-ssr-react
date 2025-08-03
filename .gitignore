@@ -8,7 +8,7 @@ node_modules/
 # ignore bunssr build files
 bunssr/__pycache__/
 bunssr/build/
-
-bunsrr.egg-info/
+# ignore egg-info
+bunssr.egg-info/
 
 .DS_Store
