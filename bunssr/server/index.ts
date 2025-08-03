@@ -1,14 +1,14 @@
 /// <reference types="bun-types" />
 import path from "path";
 import { createElement } from "react";
-import { renderToString } from "react-dom/server";
+import { renderToString, renderToStaticMarkup } from "react-dom/server";
 
 const socketPath = process.env.BUN_RENDER_SOCKET || "/tmp/bun_render_socket";
 
 const handleRequest = async (data: string) => {
   try {
     const parsedData = JSON.parse(data);
-    const { componentPath, props } = parsedData;
+    const { componentPath, props, static: useStatic } = parsedData;
 
     if (!componentPath) {
       return JSON.stringify({ error: "Component path is required" });
@@ -23,8 +23,10 @@ const handleRequest = async (data: string) => {
       throw new Error(`No default export found in ${resolvedPath}`);
     }
 
-    // Standard React render to string
-    const html = renderToString(createElement(Component, props));
+    // Conditionally render either to static markup or to string
+    const html = useStatic
+      ? renderToStaticMarkup(createElement(Component, props))
+      : renderToString(createElement(Component, props));
 
     return JSON.stringify({ html });
   } catch (error) {

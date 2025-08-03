@@ -24,7 +24,10 @@ class ReactSSRRenderer:
         self.client = UnixSocketHttpClient(self.socket_path)
 
     def render_component(
-        self, component_path: str, props: Optional[Dict[str, Any]] = None
+        self,
+        component_path: str,
+        props: Optional[Dict[str, Any]] = None,
+        static: bool = False,
     ) -> str:
         """
         Render a React component by sending its path and props to the Bun SSR server.
@@ -42,6 +45,7 @@ class ReactSSRRenderer:
         payload = {
             "componentPath": component_path,
             "props": props or {},
+            "static": static,
         }
 
         status_code, response_body = self.client.request(
